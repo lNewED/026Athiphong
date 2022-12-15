@@ -1,0 +1,40 @@
+package firefox;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+class FF {
+
+	@Test
+	void test() {
+		WebDriver driver = null;
+		String browser = "edge";
+		
+		if( browser.equalsIgnoreCase("chrome") ) {
+			System.setProperty("webdriver.chrome.driver", "D:\\chromedriver.exe");
+			driver = new ChromeDriver();
+		}
+		
+		else if ( browser.equalsIgnoreCase("firefox") ) {
+			System.setProperty("webdriver.gecko.driver", "D:\\geckodriver.exe");
+			driver = new FirefoxDriver();
+		}
+		
+		else {
+			System.setProperty("webdriver.edge.driver", "D:\\msedgedriver.exe");
+			driver = new EdgeDriver();
+		}
+		driver.get("http://www.google.com");
+		driver.findElement(By.xpath("//input[@name=\'q\']")).sendKeys("npru");
+		driver.findElement(By.name("q")).sendKeys(Keys.ENTER);
+		driver.quit();
+	}
+	
+}
